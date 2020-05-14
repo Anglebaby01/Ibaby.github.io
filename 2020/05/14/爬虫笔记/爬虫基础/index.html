@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>IBaby</title>
+  <title>爬虫笔记/爬虫基础 | IBaby</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="啦啦啦，欢迎啊！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="IBaby">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="爬虫基础0.爬虫的基本组成 URL管理模块 HTML下载模块 HTML解析模块 数据存储模块 爬虫调度模块 0.1 其他信息的了解 概念：爬虫是一种按照一定的规则，自动抓取万维网信息的程序或脚本 robots:是否允许其他爬⾍(通⽤爬⾍即浏览器)爬取某些内容  爬虫不遵守robots 爬虫不是黑客，它只能爬去到用户所能访问的数据 1.HTTP原理   1.1 URL和URI URI（Unifor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫笔记&#x2F;爬虫基础">
+<meta property="og:url" content="http://yoursite.com/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="IBaby">
-<meta property="og:description" content="啦啦啦，欢迎啊！">
+<meta property="og:description" content="爬虫基础0.爬虫的基本组成 URL管理模块 HTML下载模块 HTML解析模块 数据存储模块 爬虫调度模块 0.1 其他信息的了解 概念：爬虫是一种按照一定的规则，自动抓取万维网信息的程序或脚本 robots:是否允许其他爬⾍(通⽤爬⾍即浏览器)爬取某些内容  爬虫不遵守robots 爬虫不是黑客，它只能爬去到用户所能访问的数据 1.HTTP原理   1.1 URL和URI URI（Unifor">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/04/29/HTTPnetwork.md.png">
+<meta property="og:image" content="https://wx2.sbimg.cn/2020/04/29/2.md.png">
+<meta property="og:image" content="https://wx2.sbimg.cn/2020/04/29/3.png">
+<meta property="og:image" content="https://wx2.sbimg.cn/2020/04/29/42e63eb504b604f57.png">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/04/29/5.png">
+<meta property="og:image" content="https://wx2.sbimg.cn/2020/04/29/6.png">
+<meta property="og:image" content="https://wx2.sbimg.cn/2020/04/29/7.png">
+<meta property="article:published_time" content="2020-05-14T11:50:05.190Z">
+<meta property="article:modified_time" content="2020-04-29T09:51:02.098Z">
 <meta property="article:author" content="汪辉">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/04/29/HTTPnetwork.md.png">
   
     <link rel="alternative" href="/atom.xml" title="IBaby" type="application/atom+xml">
   
@@ -156,84 +166,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-爬虫小作业/爬取必应壁纸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-爬虫笔记/爬虫基础" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/14/%E7%88%AC%E8%99%AB%E5%B0%8F%E4%BD%9C%E4%B8%9A/%E7%88%AC%E5%8F%96%E5%BF%85%E5%BA%94%E5%A3%81%E7%BA%B8/">爬虫小作业/爬取必应壁纸</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/14/%E7%88%AC%E8%99%AB%E5%B0%8F%E4%BD%9C%E4%B8%9A/%E7%88%AC%E5%8F%96%E5%BF%85%E5%BA%94%E5%A3%81%E7%BA%B8/" class="archive-article-date">
-  	<time datetime="2020-05-14T11:50:05.207Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>通过封装成一个类来抓却图片，首先初始化需要使用到的地址、请求头信息和抓取的图片总数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def __init__(self):</span><br><span class="line">    self.BASE_URL &#x3D; &quot;https:&#x2F;&#x2F;bing.ioliu.cn&quot;</span><br><span class="line">    self.TOTAL_PAGE &#x3D; 124</span><br><span class="line">    self.headers &#x3D; &#123;</span><br><span class="line">        &quot;user-agent&quot;: &quot;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;80.0.3987.149 Safari&#x2F;537.36&quot;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-<li>保存好缓存信息，并且获得每一张的图片地址<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def spider(self):</span><br><span class="line">    session &#x3D; requests.Session()</span><br><span class="line">    for index in range(1 ,self.TOTAL_PAGE+1):</span><br><span class="line">        url &#x3D; self.BASE_URL + f&quot;&#x2F;?p&#x3D;&#123;index&#125;&quot;</span><br><span class="line">        response &#x3D; session.get(url&#x3D;url, headers&#x3D;self.headers)</span><br><span class="line">        yield response.content.decode(&quot;utf8&quot;)</span><br></pre></td></tr></table></figure></li>
-<li>利用xpath语法提取没出每一个图片地址<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def parser(html):</span><br><span class="line">    selector &#x3D; etree.HTML(html)</span><br><span class="line">    url_list &#x3D; selector.xpath(&quot;&#x2F;&#x2F;div[@class&#x3D;&#39;item&#39;]&#x2F;&#x2F;div[@class&#x3D;&#39;options&#39;]&#x2F;a[2]&#x2F;@href&quot;)</span><br><span class="line">    return url_list</span><br></pre></td></tr></table></figure></li>
-<li>以二进制的形式保存图片<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def save_picture(self, url_list):</span><br><span class="line">    session &#x3D; requests.Session()</span><br><span class="line">    index &#x3D; 0</span><br><span class="line">    for url in url_list:</span><br><span class="line">        index +&#x3D; 1</span><br><span class="line">        file_name &#x3D; url.split(&quot;&#x2F;&quot;)[2][:-15] + &quot;.jpg&quot;</span><br><span class="line">        picture_url &#x3D;  self.BASE_URL + url</span><br><span class="line">        response &#x3D; session.get(picture_url, headers&#x3D;self.headers)</span><br><span class="line">        with open(file_name, &quot;wb&quot;) as file:</span><br><span class="line">            file.write(response.content)</span><br><span class="line">            print(&#39;photo&#39;,index,&#39;:save successfully&#39;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/14/%E7%88%AC%E8%99%AB%E5%B0%8F%E4%BD%9C%E4%B8%9A/%E7%88%AC%E5%8F%96%E5%BF%85%E5%BA%94%E5%A3%81%E7%BA%B8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-爬虫笔记/爬虫基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">爬虫笔记/爬虫基础</a>
+    <h1 class="article-title" itemprop="name">
+      爬虫笔记/爬虫基础
     </h1>
   
 
@@ -478,6 +418,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -485,16 +446,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/05/14/%E7%88%AC%E8%99%AB%E5%B0%8F%E4%BD%9C%E4%B8%9A/%E7%88%AC%E5%8F%96%E5%BF%85%E5%BA%94%E5%A3%81%E7%BA%B8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          爬虫小作业/爬取必应壁纸
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">爬虫笔记/正则表达式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -514,375 +543,14 @@
 
 
 
-
   
-    <article id="post-爬虫笔记/正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">爬虫笔记/正则表达式</a>
-    </h1>
   
 
-        
-        <a href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-05-14T11:50:05.189Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>没啥好说的，留个网址查吧：<a href="https://tool.oschina.net/uploads/apidocs/jquery/regexp.html" target="_blank" rel="noopener">https://tool.oschina.net/uploads/apidocs/jquery/regexp.html</a></li>
-<li>基本的操作还可以查（正则表达式在线）</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-爬虫笔记/XPath" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/XPath/">爬虫笔记/XPath</a>
-    </h1>
   
 
-        
-        <a href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/XPath/" class="archive-article-date">
-  	<time datetime="2020-05-14T11:50:05.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>XPath，全称XML Path Language，即XML路径语言，它是一门在XML文档中查找信息的语言。其功能强大，提供了非常简洁明了的路径选择表达式。XPath筛选后的结果返回为列表。</p>
-<p>常用规则<br>|表达式|描述|<br>|—|—|<br>|nodename|    此节点的所有子节点|<br>|/    |从当前节点选取直接子节点|<br>|//    |从当前节点选取子孙节点|<br>|.    |选取当前节点}<br>|..    |选取当前节点的父节点|<br>|@    |选取属性|<br>基本使用方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">from lxml import etree</span><br><span class="line"></span><br><span class="line">### 把html文件保存到本地，命名test</span><br><span class="line">text &#x3D; &quot;&quot;&quot;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">&lt;li class&#x3D;&quot;item-0&quot;&gt;&lt;a href&#x3D;&quot;link1.html&quot;&gt;first item&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">&lt;li class&#x3D;&quot;item-1&quot;&gt;&lt;a href&#x3D;&quot;link2.html&quot;&gt;second item&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">&lt;li class&#x3D;&quot;item-inactive&quot;&gt;&lt;a href&#x3D;&quot;link3.html&quot;&gt;third item&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">&lt;li class&#x3D;&quot;item-1&quot;&gt;&lt;a href&#x3D;&quot;link4.html&quot;&gt;fourth item&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">&lt;li class&#x3D;&quot;item-0&quot;&gt;&lt;a href&#x3D;&quot;link5.html&quot;&gt;fifth item&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"># 基本使用</span><br><span class="line">html &#x3D; etree.parse(&#39;.&#x2F;test.html&#39;, etree.HTMLParser())</span><br><span class="line"># 所有节点</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;*&#39;)</span><br><span class="line"># 子节点</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li&#x2F;a&#39;)</span><br><span class="line"># 父节点</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;a[@href&#x3D;&quot;link4.html&quot;]&#x2F;parent::*&#x2F;@class&#39;)</span><br><span class="line"># 属性匹配</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li[@class&#x3D;&quot;item-0&quot;]&#39;)</span><br><span class="line"># 文本获取</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li[@class&#x3D;&quot;item-0&quot;]&#x2F;a&#x2F;text()&#39;)</span><br><span class="line"># 属性获取</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li&#x2F;a&#x2F;@href)</span><br><span class="line"># 属性多值匹配</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li[contains(@class, &quot;li&quot;)]&#x2F;a&#x2F;text()&#39;)</span><br><span class="line"># 多属性匹配</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li[contains(@class, &quot;li&quot;) and @name&#x3D;&quot;item&quot;]&#x2F;a&#x2F;text()&#39;)</span><br><span class="line"># 按序选择</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li[last()]&#x2F;a&#x2F;text()&#39;)</span><br><span class="line"># 节点轴选择</span><br><span class="line">result &#x3D; html.xpath(&#39;&#x2F;&#x2F;li[1]&#x2F;ancestor::*&#39;)</span><br><span class="line"># 拼接同级标签内容</span><br><span class="line">total &#x3D; html.xpath(&#39;concat(&#x2F;&#x2F;span[@class&#x3D;&quot;total&quot;]&#x2F;span&#x2F;text(),&#x2F;&#x2F;span[@class&#x3D;&quot;unit&quot;]&#x2F;span&#x2F;text())&#39;)</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/XPath/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-爬虫笔记/urllib" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/urllib/">爬虫笔记/urllib</a>
-    </h1>
   
 
-        
-        <a href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/urllib/" class="archive-article-date">
-  	<time datetime="2020-05-14T11:50:05.186Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="二、urllib库简介"><a href="#二、urllib库简介" class="headerlink" title="二、urllib库简介"></a>二、urllib库简介</h3><ul>
-<li>urllib是Python内置的一个HTTP请求库</li>
-<li>包含4个模块：request,error,parse,robotparser<h4 id="1-urllib-request"><a href="#1-urllib-request" class="headerlink" title="1.urllib.request"></a>1.urllib.request</h4></li>
-<li>模拟浏览器像服务器发送请求，需要使用的是urllib.request模块，其中最基础的请求方法就是 urlopen() 方法,默认为GET请求，传入data后为POST请求  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">urllib.request.urlopen(url, data&#x3D;None, [timeout, ]*, cafile&#x3D;None, capath&#x3D;None,cadefault&#x3D;False,context&#x3D;None)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>url 可以是字符串，也可以是自己构造的Request对象</li>
-<li>data 是需要发送给服务器的数据对象，如果没有则不用填写， 默认为None</li>
-<li>timeout 超时设置，是一个可选参数，传入超时时间后，如果在指定的时间内服务器没有响应则抛出 timeout 异常，基本上爬虫时都会用到，以避免服务器未响应</li>
-<li>cafile 和 capath 代表 CA 证书和 CA 证书的路径。如果使用 HTTPS 则可能需要用到</li>
-<li>context 参数必须是 ssl.SSLContext 类型，用来指定 SSL 设置</li>
-</ul>
-</li>
-<li>请求网页  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request  &quot;&quot;&quot;导入模块&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">url &#x3D; &quot;http:&#x2F;&#x2F;www.baidu.com&quot;</span><br><span class="line">response &#x3D; urllib.request.urlopen(url)  #使用 urlopen 方法获取到的是一个 http.client.HTTPResponse 对象</span><br><span class="line">html &#x3D; response.read()   #使用 read() 方法将response中的网页源代码读出来</span><br><span class="line">print(html.decode(&#39;utf-8&#39;))  #使用 decode() 方法将读取出来的网页源代码编码转换成 utf-8 编码</span><br></pre></td></tr></table></figure>
-<ul>
-<li>其他的一些操作：<ul>
-<li>response.getcode()，获取状态码</li>
-<li>response.readline()，以字节流 返回所有得数据 以列表格式保存</li>
-<li>response.getheaders()，获取响应头</li>
-<li>response.geturl()，获取url      <pre><code>------   </code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>构建Request对象<ul>
-<li>urlopen() 可以支撑我们的一些简单的请求，但是请记住，一个没有请求头的爬虫是没有灵魂的。虽然不使用请求头也可以访问一些网页，但是这样的行为是直接告诉服务器“我是一个爬虫”，那么服务器可能就会拒绝程序的请求，因此我们需要进行伪装，这时候我们就需要去构造我们的HTTP请求体，一个Request对象。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">def crawler():</span><br><span class="line">    url &#x3D; &quot;http:&#x2F;&#x2F;www.maoyan.com&quot;</span><br><span class="line">    headers &#x3D; &#123;</span><br><span class="line">    &quot;User-agent&quot;: &quot;Mozilla&#x2F;5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit&#x2F;534.50</span><br><span class="line">    (KHTML, like Gecko) Version&#x2F;5.1 Safari&#x2F;534.50&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    request &#x3D; urllib.request.Request(url&#x3D;url,headers&#x3D;headers)</span><br><span class="line">    response &#x3D; urllib.request.urlopen(request)</span><br><span class="line">    print(response.read().decode(&#39;utf-8&#39;))</span><br><span class="line"></span><br><span class="line">crawler()</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-urllib-parse"><a href="#2-urllib-parse" class="headerlink" title="2.urllib.parse"></a>2.urllib.parse</h4><ul>
-<li><p>用于解析URL（python由ASCII编码，不支持中文，输入中文时必须解析url，否则无法运行）</p>
-</li>
-<li><p>解析方法一：调用urllib.parse.quote</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">import urllib.parse</span><br><span class="line">import string</span><br><span class="line"></span><br><span class="line">def crawler():</span><br><span class="line">    basis_url &#x3D; &quot;https:&#x2F;&#x2F;www.baidu.com&#x2F;s?wd&#x3D;&quot;</span><br><span class="line">    key_word &#x3D; &quot;中文&quot;</span><br><span class="line">    url &#x3D; basis_url + key_word  #通过拼接来确定搜索内容</span><br><span class="line">    encode_url &#x3D; urllib.parse.quote(key_word, safe&#x3D;string.printable)</span><br><span class="line">    #key_word中出现了中文，通过urllib.parse.quote的方法来解析成python的可识别ASCII字符，其中 safe&#x3D;string.printable是必须要求填写的</span><br><span class="line"></span><br><span class="line">    response &#x3D; urllib.request.urlopen(encode_url)</span><br><span class="line">    html &#x3D; response.read().decode(&quot;utf-8&quot;)</span><br><span class="line">    print(html)</span><br><span class="line"></span><br><span class="line">crawler()</span><br></pre></td></tr></table></figure></li>
-<li><p>解析方法二：调用urllib.parse.urlencode()，支持多个参数解析,参数用字典封装起来</p>
-<ul>
-<li>通过该方法会直接将字典格式转化成转化为字符串：’wd’:’穷哈’  -&gt; 调用方法后：wd = %E7%A9%B7%E5%93%88</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">import urllib.parse</span><br><span class="line">def crawler():</span><br><span class="line">    basis_url &#x3D; &quot;http:&#x2F;&#x2F;www.baidu.com&#x2F;s?&quot;</span><br><span class="line">    params &#x3D; &#123;&quot;wd&quot;: &quot;中文&quot;,&quot;keyword&quot;: &quot;你好&quot;&#125;</span><br><span class="line">    encode_url &#x3D; urllib.parse.urlencode(params)</span><br><span class="line">    print(encode_url)</span><br><span class="line">    url &#x3D; basis_url + encode_url</span><br><span class="line">    print(url)</span><br><span class="line"></span><br><span class="line">crawler()</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>data参数的传入</p>
-<ul>
-<li>在请求某些网页时需要携带一些数据，我们就需要使用到 data</li>
-<li>我们编写时将data编写为一个字典类型，使用时需要被转码成字节流，这就需要需要使用 urllib.parse.urlencode() 将字典转化为字符串，再使用 bytes() 转为字节流，最后使用 urlopen() 发起请求，请求是模拟用 POST 方式提交表单数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import urllib.parse</span><br><span class="line">import urllib.request</span><br><span class="line">def crawler():</span><br><span class="line">    url &#x3D; &quot;https:&#x2F;&#x2F;cn.bing.com&#x2F;ttranslatev3?sVertical&#x3D;1&amp;&amp;IG&#x3D;2B73CBCDC8F54EAFABF49389E29DC19A&amp;IID&#x3D;translator.5028.2&quot;</span><br><span class="line">    form_data &#x3D; &#123;</span><br><span class="line">    &quot;fromLang&quot;: &quot;auto-detect&quot;,</span><br><span class="line">    &quot;text&quot;: &quot;爬虫&quot;,</span><br><span class="line">    &quot;to&quot;: &quot;en&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    data &#x3D; bytes(urllib.parse.urlencode(form_data), encoding&#x3D;&#39;utf8&#39;)</span><br><span class="line">    response &#x3D; urllib.request.urlopen(url, data&#x3D;data)</span><br><span class="line">    print(response.read().decode(&#39;utf-8&#39;))</span><br><span class="line"></span><br><span class="line">crawler()</span><br></pre></td></tr></table></figure>
-<h4 id="代理IP的引入"><a href="#代理IP的引入" class="headerlink" title="代理IP的引入"></a>代理IP的引入</h4></li>
-</ul>
-</li>
-<li><p>系统的urlopen并没有添加代理的功能所以需要我们自定义这个功能，构建处理器hander和opener</p>
-<ul>
-<li>原始的urlopen()方法已经够强大了，但是这并不能满足我们构建一个更加像浏览器的爬虫，所以这时候需要我们自己去构造我们的处理器（handler），然后通过OpenerDirector（opener）去使用处理器，urlopen就是一个Python为我们构造好的opener。</li>
-<li>Handler 能处理请求（HTTP、HTTPS、FTP等）中的各种事情，它是通过 urllib.request.BaseHandler 这个类来实 现的。urllib.request.BaseHandler是所有的 Handler 的基类，其提供了最基本的Handler的方法</li>
-<li>常见的Handler类：<ul>
-<li>ProxyHandler ：为请求设置代理</li>
-<li>HTTPCookieProcessor ：处理 HTTP 请求中的 Cookies</li>
-<li>HTTPPasswordMgr ：用于管理密码，它维护了用户名密码的表。</li>
-<li>HTTPBasicAuthHandler ：用于登录认证，一般和 HTTPPasswordMgr 结合使用。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><code>创建hander</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import urlib.request</span><br><span class="line"></span><br><span class="line">def myOpener():</span><br><span class="line">    url &#x3D; &quot;http:&#x2F;&#x2F;www.baidu.com&quot;</span><br><span class="line"></span><br><span class="line">    handler &#x3D; urllib.request.HTTPHandler() #创建自己的hander</span><br><span class="line">      </span><br><span class="line">    opener&#x3D;urllib.request.build_opener(handler)  #创建自己的oppener</span><br><span class="line"></span><br><span class="line">    response &#x3D; opener.open(url) #用自己创建的opener调用open方法请求数据</span><br><span class="line">    data &#x3D; response.read().decode(&quot;utf-8&quot;)</span><br><span class="line">    print(data)</span><br><span class="line"></span><br><span class="line">myOpener</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>代理IP的使用（普通）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">def spider():</span><br><span class="line">    url &#x3D; &quot;http:&#x2F;&#x2F;www.httpbin.org&#x2F;ip&quot;</span><br><span class="line">    #proxy为代理IP</span><br><span class="line">    proxy &#x3D; &#123;   </span><br><span class="line">    &quot;http&quot;: &quot;110.243.2.58:9999&quot;,</span><br><span class="line">    &quot;http&quot;: &quot;117.69.150.100:9999&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    #创建代理IP的hander</span><br><span class="line">    proxy_handler &#x3D; urllib.request.ProxyHandler(proxy)</span><br><span class="line">    #创建代理IP的opener</span><br><span class="line">    opener &#x3D; urllib.request.build_opener(proxy_handler)</span><br><span class="line">    #用代理ip去发送请求</span><br><span class="line">    response &#x3D; opener.open(url)</span><br><span class="line">    data &#x3D; response.read().decode(&quot;utf-8&quot;)</span><br><span class="line">    print(data)</span><br><span class="line">    </span><br><span class="line">spider()</span><br></pre></td></tr></table></figure></li>
-<li><p>代理IP的使用（购买）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">def spider():</span><br><span class="line">    #1.添加用户名和密码</span><br><span class="line">    use_name &#x3D; &quot;name&quot;</span><br><span class="line">    pwd &#x3D; &quot;123456&quot;</span><br><span class="line">    proxy_money &#x3D; &quot;代理ip地址&quot;</span><br><span class="line">    #2.创建密码管理器,添加用户名和密码</span><br><span class="line">    password_manager &#x3D; urllib.request.HTTPPasswordMgrWithDefaultRealm()</span><br><span class="line">    #url 资源定位符</span><br><span class="line">    password_manager.add_password(None,proxy_money,use_name,pwd)</span><br><span class="line">    #3.创建可以验证代理ip的处理器</span><br><span class="line">    handle_auth_proxy &#x3D; urllib.request.ProxyBasicAuthHandler(password_manager)</span><br><span class="line">    #4.根据处理器创建opener</span><br><span class="line">    opener_auth &#x3D; urllib.request.build_opener(handle_auth_proxy)</span><br><span class="line">    #5.发送请求</span><br><span class="line">    response &#x3D; opener_auth.open(&quot;http:&#x2F;&#x2F;www.baidu.com&quot;)</span><br><span class="line">    print(response.read())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">spider()</span><br></pre></td></tr></table></figure></li>
-<li><p>局域网爬取（auth认证）</p>
-<ul>
-<li>和购买的IP一样需要输入用户名和密码，创建密码管理器和处理器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line"></span><br><span class="line">def local_area_network():</span><br><span class="line">    #1.添加用户名密码</span><br><span class="line">    user &#x3D; &quot;admin&quot;</span><br><span class="line">    pwd &#x3D; &quot;123456&quot;</span><br><span class="line">    local_area_network_url &#x3D; &quot;http:&#x2F;&#x2F;192....&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    #2.创建密码管理器</span><br><span class="line">    pwd_manager &#x3D; urllib.request.HTTPPasswordMgrWithDefaultRealm()</span><br><span class="line"></span><br><span class="line">    pwd_manager.add_password(None,nei_url,user,pwd)</span><br><span class="line"></span><br><span class="line">    #创建认证处理器(requests)</span><br><span class="line">    auth_handler &#x3D; urllib.request.HTTPBasicAuthHandler(pwd_manager)</span><br><span class="line"></span><br><span class="line">    opener &#x3D; urllib.request.build_opener(auth_handler)</span><br><span class="line"></span><br><span class="line">    response &#x3D; opener.open(local_area_network_url)</span><br><span class="line">    print(response)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">local_area_network()</span><br></pre></td></tr></table></figure>
-####cookie介绍</li>
-</ul>
-</li>
-<li><p>为什么要使用Cookie呢？</p>
-<ul>
-<li>Cookie，指某些网站为了辨别用户身份、进行session跟踪而储存在用户本地终端上的数据（通常经过加密）比如说有些网站需要登录后才能访问某个页面，在登录之前，你想抓取某个页面内容是不允许的。那么我们可以利用Urllib库保存我们登录的Cookie，然后再抓取其他页面就达到目的了。</li>
-<li>同样urlopen不能满足我们，我们还是需要构建opener</li>
-<li>需要使用到的模块：http.cookiejar<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import http.cookiejar</span><br><span class="line">import urllib.request</span><br><span class="line">def crawler():</span><br><span class="line">    url &#x3D; &quot;http:&#x2F;&#x2F;tieba.baidu.com&#x2F;&quot;</span><br><span class="line">    headers &#x3D; &#123;</span><br><span class="line">    &quot;User-agent&quot;: &quot;Mozilla&#x2F;5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit&#x2F;534.50</span><br><span class="line">    (KHTML, like Gecko) Version&#x2F;5.1 Safari&#x2F;534.50&quot;,</span><br><span class="line">    &quot;Cookie&quot;: &quot;cookies&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    request &#x3D; urllib.request.Request(url,headers&#x3D;headers)</span><br><span class="line">    cookie &#x3D; http.cookiejar.CookieJar()</span><br><span class="line">    handler &#x3D; urllib.request.HTTPCookieProcessor(cookie)</span><br><span class="line">    opener &#x3D; urllib.request.build_opener(handler)</span><br><span class="line">    response &#x3D; opener.open(requests)</span><br><span class="line"></span><br><span class="line">crawler()</span><br></pre></td></tr></table></figure>
-<h4 id="3-urllib-robotparse"><a href="#3-urllib-robotparse" class="headerlink" title="3.urllib.robotparse"></a>3.urllib.robotparse</h4></li>
-</ul>
-</li>
-<li><p>解析robots.txt文件</p>
-<h4 id="4-urllib-error"><a href="#4-urllib-error" class="headerlink" title="4.urllib.error"></a>4.urllib.error</h4></li>
-<li><p>处理urllib.request抛出的异常类型</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/urllib/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-爬虫笔记/reuquests库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/reuquests%E5%BA%93/">爬虫笔记/reuquests库</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/reuquests%E5%BA%93/" class="archive-article-date">
-  	<time datetime="2020-05-14T11:50:05.184Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###reuquests库</p>
-<ul>
-<li>衍生与urllib库，比urllib库更加强大和实用</li>
-<li>属于第三方库，需要下载安装<h3 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;www.baidu.com&#39;</span><br><span class="line">headers &#x3D; &#123;</span><br><span class="line">    &#39;User-Agent&#39;:&#39;Mozilla&#x2F;5.0&#39;</span><br><span class="line">&#125;</span><br><span class="line">try:</span><br><span class="line">    response &#x3D; requests.get(url, headers &#x3D; headers)</span><br><span class="line">    response.raise_for_status()</span><br><span class="line">    response.encoding &#x3D; r.apparent_encoding</span><br><span class="line">    return response.text</span><br><span class="line">except:</span><br><span class="line">    print(&#39;爬取失败&#39;)</span><br></pre></td></tr></table></figure>
-<h3 id="实例引入"><a href="#实例引入" class="headerlink" title="实例引入"></a>实例引入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">response &#x3D; requests.get(&#39;https:&#x2F;&#x2F;www.baidu.com&#x2F;&#39;)</span><br><span class="line">print(type(response))</span><br><span class="line">print(response.status_code)</span><br><span class="line">print(type(response.text))</span><br><span class="line">print(response.text)</span><br><span class="line">print(response.cookies)</span><br></pre></td></tr></table></figure>
-<h3 id="各种请求方式"><a href="#各种请求方式" class="headerlink" title="各种请求方式"></a>各种请求方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">requests.post(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;post&#39;)</span><br><span class="line">requests.put(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;put&#39;)</span><br><span class="line">requests.delete(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;delete&#39;)</span><br><span class="line">requests.head(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;get&#39;)</span><br><span class="line">requests.options(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;get&#39;)</span><br></pre></td></tr></table></figure>
-<h3 id="带参数的get请求"><a href="#带参数的get请求" class="headerlink" title="带参数的get请求"></a>带参数的get请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">data &#x3D; &#123;</span><br><span class="line">    &#39;name&#39;:&#39;gemey&#39;,</span><br><span class="line">    &#39;age&#39;:22</span><br><span class="line">&#125;</span><br><span class="line">response &#x3D; requests.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;get&#39;, params&#x3D;data)</span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
-<h3 id="转换成json格式"><a href="#转换成json格式" class="headerlink" title="转换成json格式"></a>转换成json格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line">response &#x3D; requests.get(&#39;https:&#x2F;&#x2F;httpbin.org&#x2F;get&#39;)</span><br><span class="line">print(type(response.text))</span><br><span class="line">print(response.json())</span><br><span class="line">print(json.loads(response.text))</span><br><span class="line">print(type(response.json()))</span><br></pre></td></tr></table></figure>
-<h3 id="获取二进制数据"><a href="#获取二进制数据" class="headerlink" title="获取二进制数据"></a>获取二进制数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">response &#x3D; requests.get(&#39;http:&#x2F;&#x2F;github.com&#x2F;favicon.ico&#39;)</span><br><span class="line">with open(&#39;favicon.ico&#39;,&#39;wb&#39;) as f:</span><br><span class="line">    f.write(response.content)</span><br><span class="line">    f.close()</span><br></pre></td></tr></table></figure>
-<h3 id="添加headers"><a href="#添加headers" class="headerlink" title="添加headers"></a>添加headers</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">headers &#x3D; &#123;</span><br><span class="line">    &#39;User-Agent&#39;:&#39;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;80.0.3987.132 Safari&#x2F;537.36&#39;</span><br><span class="line">&#125;</span><br><span class="line">response &#x3D; requests.get(&#39;https:&#x2F;&#x2F;www.zhihu.com&#x2F;explore&#39;, headers&#x3D;headers)</span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
-<h4 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h4><h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">files &#x3D; &#123;&#39;file&#39;:open(&#39;favicon.ico&#39;, &#39;rb&#39;)&#125;</span><br><span class="line">response &#x3D; requests.post(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;post&#39;, files&#x3D;files)</span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
-<h3 id="获取cookies"><a href="#获取cookies" class="headerlink" title="获取cookies"></a>获取cookies</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">response &#x3D; requests.get(&#39;http:&#x2F;&#x2F;www.baidu.com&#39;)</span><br><span class="line">print(response.cookies)</span><br><span class="line">for key, value in response.cookies.items():</span><br><span class="line">    print(key + &#39;&#x3D;&#39; + value)</span><br></pre></td></tr></table></figure>
-<h3 id="会话维持"><a href="#会话维持" class="headerlink" title="会话维持"></a>会话维持</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">s &#x3D; requests.Session()</span><br><span class="line">s.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;cookies&#x2F;set&#x2F;number&#x2F;123456789&#39;)</span><br><span class="line">response &#x3D; s.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;cookies&#39;)</span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    response &#x3D; requests.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;get&#39;, timeout&#x3D;0.1)</span><br><span class="line">    print(response.status_code)</span><br><span class="line">except Exception as e:</span><br><span class="line">    print(e)</span><br></pre></td></tr></table></figure>
-<h3 id="图片下载保存路径和命名方法"><a href="#图片下载保存路径和命名方法" class="headerlink" title="图片下载保存路径和命名方法"></a>图片下载保存路径和命名方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url &#x3D; &#39;https:&#x2F;&#x2F;img10.360buyimg.com&#x2F;n5&#x2F;s75x75_jfs&#x2F;t1&#x2F;42272&#x2F;20&#x2F;10323&#x2F;135815&#x2F;5d3d6adfE63e2cb03&#x2F;7c966e6a71f02044.jpg&#39;</span><br><span class="line">headers &#x3D; &#123;</span><br><span class="line">    &#39;User-Agent&#39;:&#39;Mozilla&#x2F;5.0&#39;</span><br><span class="line">&#125;</span><br><span class="line">root &#x3D; &#39;D:&#x2F;&#x2F;images&#x2F;&#x2F;&#39;</span><br><span class="line">path &#x3D; root + url.split(&#39;&#x2F;&#39;)[-1]</span><br><span class="line">try:</span><br><span class="line">    if not os.path.exists(root):</span><br><span class="line">        os.mkdir(root)</span><br><span class="line">    if not os.path.exists(path):</span><br><span class="line">        response &#x3D; requests.get(url, headers&#x3D;headers)</span><br><span class="line">        response.raise_for_status()</span><br><span class="line">        response.encoding &#x3D; response.apparent_encoding</span><br><span class="line">        with open(path, &#39;wb&#39;) as f:</span><br><span class="line">            f.write(response.content)</span><br><span class="line">            f.close()</span><br><span class="line">            print(&#39;文件下载完成&#39;)</span><br><span class="line">    else:</span><br><span class="line">        print(&#39;文件已存在&#39;)</span><br><span class="line">except:</span><br><span class="line">    print(&#39;爬取失败&#39;)</span><br><span class="line">打印出现中文乱码</span><br></pre></td></tr></table></figure>
-<h3 id="以网页编码格式解析"><a href="#以网页编码格式解析" class="headerlink" title="以网页编码格式解析"></a>以网页编码格式解析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.encoding &#x3D; response.apparrent_code</span><br></pre></td></tr></table></figure>
-<h3 id="先返回二进制格式，再转码成utf-8"><a href="#先返回二进制格式，再转码成utf-8" class="headerlink" title="先返回二进制格式，再转码成utf-8"></a>先返回二进制格式，再转码成utf-8</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.content.decode(&#39;utf-8&#39;)</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/14/%E7%88%AC%E8%99%AB%E7%AC%94%E8%AE%B0/reuquests%E5%BA%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -905,8 +573,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
